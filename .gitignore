@@ -1,0 +1,9 @@
+node_modules
+dist
+.idea
+.idea/workspace.xml
+
+# Local Netlify folder
+.netlify
+
+.DS_Store
