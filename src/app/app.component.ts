@@ -1,6 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { Observable, Subject, of } from 'rxjs';
-import { ApiHttpService, ApiResponse } from './api-http.service';
+import { ApiHttpService, ApiResponse, TransformedResponse } from './api-http.service';
 
 interface Node {
   id: string;
@@ -38,28 +38,28 @@ export class AppComponent implements AfterViewInit {
   callApi() {
     this.response$ = this.apiHttpService.getRelatedKeywords(this.keyword);
 
-    this.response$.subscribe((response: ApiResponse[]) => {
+    this.response$.subscribe((response: TransformedResponse[]) => {
       const edges = [];
       const nodes = [];
 
       response.forEach((item) => {
         edges.push({
-          source: item.from,
-          target: item.to,
-          id: `${item.from.replace(' ', '_')}-to-${item.to.replace(' ', '_')}`,
+          source: item.fromId,
+          target: item.toId,
+          id: `${item.fromId}-${item.toId}`,
           weight: item.weight,
         });
 
         if (!nodes.find((node) => node.label === item.from)) {
           nodes.push({
-            id: item.from,
+            id: item.fromId,
             label: item.from,
           });
         }
 
         if (!nodes.find((node) => node.label === item.to)) {
           nodes.push({
-            id: item.to,
+            id: item.toId,
             label: item.to,
           });
         }
