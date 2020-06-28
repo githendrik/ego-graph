@@ -58,8 +58,7 @@
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
-                        "browserTarget": "ego-graph:build",
-                        "proxyConfig": "proxy.conf.json"
+                        "browserTarget": "ego-graph:build"
                     },
                     "configurations": {
                         "production": {
